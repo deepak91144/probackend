@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: probackend API
+  description: API for probacked course
+  version: 1.0.0
+  contact:
+    email: deepak_dibyajyoti@hotmail.com
+
+servers:
+  - url: "http://localhost:8000/api"
+    description: for localhost
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
+paths:
+  # for signup
+  /v1/signup:
+    post:
+      tags:
+        - User
+      summary: creates an user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+
+      responses:
+        201:
+          description: return new user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  user:
+                    type: object
+                  token:
+                    type: string
+        400:
+          description: bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+        500:
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
